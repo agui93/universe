@@ -9,6 +9,11 @@ public class Actor {
     public Actor() {
     }
 
+    public Actor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Actor(Integer id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;

@@ -5,6 +5,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import javax.sql.DataSource;
+
 public class JdbcManager {
     public static JdbcManager INSTANCE = new JdbcManager();
 
@@ -22,6 +24,10 @@ public class JdbcManager {
 
     public NamedParameterJdbcTemplate fetchNamedParameterJdbcTemplate() {
         return (NamedParameterJdbcTemplate) beanFactory.getBean("namedParameterJdbcTemplate");
+    }
+
+    public DataSource fetchDataSource() {
+        return (DataSource) beanFactory.getBean("dataSource");
     }
 
 }

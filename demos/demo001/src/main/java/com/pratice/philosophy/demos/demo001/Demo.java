@@ -4,13 +4,12 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.*;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Demo {
     private static RowMapper<Actor> rowMapper = (rs, rowNum) -> {
@@ -225,12 +224,83 @@ public class Demo {
     }
 
     private static void simpleJdbcInsert() {
+        JdbcTemplate jdbcTemplate = JdbcManager.INSTANCE.fetchJdbcTemplate();
+        jdbcTemplate.execute("drop table  if  exists t_actor");
+        String sql_createTable = "create table t_actor (id Integer  auto_increment primary key, first_name varchar(100),last_name varchar (100));";
+        jdbcTemplate.execute(sql_createTable);
+        System.out.println();
+        System.out.println(sql_createTable);
+
+
+        DataSource dataSource = JdbcManager.INSTANCE.fetchDataSource();
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("t_actor");
+
+
+        Map<String, Object> parameters = new HashMap<String, Object>(3);
+        parameters.put("id", 1);
+        parameters.put("first_name", "first01");
+        parameters.put("last_name", "last01");
+        simpleJdbcInsert.execute(parameters);
+        System.out.println();
+        String sql_select = "select id,first_name, last_name from t_actor";
+        List<Actor> actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+
+        System.out.println();
+        simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("t_actor").usingGeneratedKeyColumns("id");
+        parameters = new HashMap<>(2);
+        parameters.put("first_name", "first022");
+        parameters.put("last_name", "last022");
+        Number newId = simpleJdbcInsert.executeAndReturnKey(parameters);
+        System.out.println(newId);
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+        System.out.println();
+        simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("t_actor")
+                .usingColumns("first_name")
+                .usingGeneratedKeyColumns("id");
+        parameters = new HashMap<>(2);
+        parameters.put("first_name", "first033");
+        parameters.put("last_name", "last033");
+        newId = simpleJdbcInsert.executeAndReturnKey(parameters);
+        System.out.println(newId);
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+
+        System.out.println();
+        simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("t_actor")
+                .usingGeneratedKeyColumns("id");
+        Actor actor = new Actor("first04", "last04");
+        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(actor);
+        newId = simpleJdbcInsert.executeAndReturnKey(sqlParameterSource);
+        System.out.println(newId);
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+
+        sqlParameterSource = new MapSqlParameterSource()
+                .addValue("first_name", "first05")
+                .addValue("last_name", "last05");
+        newId = simpleJdbcInsert.executeAndReturnKey(sqlParameterSource);
+        System.out.println(newId);
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
 
     }
 
     public static void main(String[] args) {
 //        basicOperations();
 //        batchOperations();
-
+        simpleJdbcInsert();
     }
 }
