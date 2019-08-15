@@ -1,26 +1,27 @@
 package com.pratice.philosophy.demos.demo001;
 
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.*;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class Demo {
+    private static RowMapper<Actor> rowMapper = (rs, rowNum) -> {
+        Actor actor1 = new Actor();
+        actor1.setId(rs.getInt("id"));
+        actor1.setFirstName(rs.getString("first_name"));
+        actor1.setLastName(rs.getString("last_name"));
+        return actor1;
+    };
 
-    private static void test001() {
-        RowMapper<Actor> rowMapper = (rs, rowNum) -> {
-            Actor actor1 = new Actor();
-            actor1.setId(rs.getInt("id"));
-            actor1.setFirstName(rs.getString("first_name"));
-            actor1.setLastName(rs.getString("last_name"));
-            return actor1;
-        };
+    private static void basicOperations() {
         JdbcTemplate jdbcTemplate = JdbcManager.INSTANCE.fetchJdbcTemplate();
 
 
@@ -134,7 +135,102 @@ public class Demo {
 
     }
 
+    private static void batchOperations() {
+        JdbcTemplate jdbcTemplate = JdbcManager.INSTANCE.fetchJdbcTemplate();
+
+
+        jdbcTemplate.execute("drop table  if  exists t_actor");
+        String sql_createTable = "create table t_actor (id Integer , first_name varchar(100),last_name varchar (100));";
+        jdbcTemplate.execute(sql_createTable);
+        System.out.println();
+        System.out.println(sql_createTable);
+
+
+        List<Actor> actors = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            actors.add(new Actor(i, "firstName" + i, "lastName" + i));
+        }
+        List<Actor> finalActors = actors;
+
+
+        int[] batchUpdateResult = jdbcTemplate.batchUpdate("insert into t_actor (id, first_name, last_name) values (?, ?, ?)",
+                new BatchPreparedStatementSetter() {
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setLong(1, finalActors.get(i).getId());
+                        ps.setString(2, finalActors.get(i).getFirstName());
+                        ps.setString(3, finalActors.get(i).getLastName());
+                    }
+
+                    public int getBatchSize() {
+                        return finalActors.size();
+                    }
+                });
+        System.out.println();
+        String sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+
+        batchUpdateResult = jdbcTemplate.batchUpdate("update t_actor set first_name = ?, last_name = ? where id = ?",
+                new BatchPreparedStatementSetter() {
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setString(1, finalActors.get(i).getFirstName() + i);
+                        ps.setString(2, finalActors.get(i).getLastName() + i);
+                        ps.setLong(3, finalActors.get(i).getId());
+                    }
+
+                    public int getBatchSize() {
+                        return finalActors.size();
+                    }
+                });
+        System.out.println();
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+
+        List<Object[]> batch = new ArrayList<>();
+        for (Actor actor : actors) {
+            Object[] values = new Object[]{actor.getFirstName() + "Test", actor.getLastName() + "Test", actor.getId()};
+            batch.add(values);
+        }
+        batchUpdateResult = jdbcTemplate.batchUpdate("update t_actor set first_name = ?, last_name = ? where id = ?", batch);
+        System.out.println();
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = JdbcManager.INSTANCE.fetchNamedParameterJdbcTemplate();
+        batchUpdateResult = namedParameterJdbcTemplate.batchUpdate("update t_actor set first_name = :firstName, last_name = :lastName where id = :id",
+                SqlParameterSourceUtils.createBatch(finalActors.toArray()));
+        System.out.println();
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+
+        int[][] updateCounts = jdbcTemplate.batchUpdate("update t_actor set first_name = ?, last_name = ? where id = ?",
+                actors, 2,
+                (ps, argument) -> {
+                    ps.setString(1, argument.getFirstName() + "Hello");
+                    ps.setString(2, argument.getLastName() + "Hello");
+                    ps.setLong(3, argument.getId().longValue());
+                });
+        System.out.println();
+        sql_select = "select id,first_name, last_name from t_actor";
+        actors = jdbcTemplate.query(sql_select, rowMapper);
+        System.out.println(actors);
+
+    }
+
+    private static void simpleJdbcInsert() {
+
+    }
+
     public static void main(String[] args) {
-        test001();
+//        basicOperations();
+//        batchOperations();
+
     }
 }
