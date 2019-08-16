@@ -302,8 +302,6 @@ public class Demo {
         //https://docs.spring.io/spring/docs/5.1.9.RELEASE/spring-framework-reference/data-access.html#jdbc-simple-jdbc-call-1
     }
 
-
-
     public static void main(String[] args) {
 //        basicOperations();
 //        batchOperations();
