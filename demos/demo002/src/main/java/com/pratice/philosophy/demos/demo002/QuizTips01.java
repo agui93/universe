@@ -232,10 +232,10 @@ public class QuizTips01 {
 
 
     public static void main(String[] args) throws Exception {
-//        printDrivers();
-//        connectionByDriverManager();
-//        connectionByDataSource();
-//        checkDriverServerInfo();
+        printDrivers();
+        connectionByDriverManager();
+        connectionByDataSource();
+        checkDriverServerInfo();
 
         dropTable();
         createTableWithAutoIncrement();
