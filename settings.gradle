@@ -1,3 +1,5 @@
 rootProject.name = 'universe'
 include 'demos:demo001'
+include 'demos:demo002'
+findProject(':demos:demo002')?.name = 'demo002'
 

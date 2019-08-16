@@ -3,6 +3,24 @@ demo001:{spring jdbc}
     REFERENCE:https://docs.spring.io/spring/docs/5.1.9.RELEASE/spring-framework-reference/data-access.html#jdbc
 
 
+demo002:{JDBC}
+    REFERENCE:http://www.herongyang.com/JDBC/
+        http://www.herongyang.com/JDBC/MySQL-JDBC-Driver.html
+        http://www.herongyang.com/JDBC/MySQL-PreparedStatement.html
+        http://www.herongyang.com/JDBC/MySQL-JdbcRowSet-Implementation.html
+        http://www.herongyang.com/JDBC/MySQL-CallableStatement.html
+        http://www.herongyang.com/JDBC/MySQL-CLOB-Large-Object.html
+        http://www.herongyang.com/JDBC/MySQL-BLOB-Large-Object.html
+
+
+demo00X:{XXX}
+    REFERENCE:
+
+
+demo00X:{XXX}
+    REFERENCE:
+
+
 demo00X:{XXX}
     REFERENCE:
 
