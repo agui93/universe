@@ -4,8 +4,9 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 import java.sql.*;
 import java.util.Enumeration;
+import java.util.Random;
 
-public class NativeDemo {
+public class QuizTips01 {
 
     private static String databaseName = "jdbc";
     private static String user = "root";
@@ -140,13 +141,106 @@ public class NativeDemo {
         }
     }
 
+    //前提数据库和表已创建
+    private static void checkInsertStatement() {
+        Connection con = null;
+        try {
+            // Setting up the DataSource object
+            com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
+            ds.setServerName("localhost");
+            ds.setPortNumber(3306);
+            ds.setDatabaseName(databaseName);
+            ds.setUser(user);
+            ds.setPassword(passwd);
+
+
+            // Getting a connection object and statement object
+            con = ds.getConnection();
+            Statement sta = con.createStatement();
+            int count = 0;
+
+            // insert a single row using default values
+            count += sta.executeUpdate("INSERT INTO Profile" + " (FirstName)" + " VALUES ('Herong')");
+
+            // insert a single row using provided values
+            count += sta.executeUpdate(
+                    "INSERT INTO Profile" + " (FirstName, LastName, Point, BirthDate)"
+                            + " VALUES ('Janet', 'Gates', 999.99, '1984-10-13')");
+
+
+            // insert rows with loop with random values
+            Random r = new Random();
+            for (int i = 0; i < 10; i++) {
+                float points = 1000 * r.nextFloat();
+                String firstName = Integer.toHexString(r.nextInt(9999));
+                String lastName = Integer.toHexString(r.nextInt(999999));
+                count += sta.executeUpdate("INSERT INTO Profile" + " (FirstName, LastName, Point)"
+                        + " VALUES ('" + firstName + "', '" + lastName + "', " + points + ")");
+            }
+
+            // How many rows were inserted
+            System.out.println("Number of rows inserted: " + count);
+
+            // Checking inserted rows
+            ResultSet res = sta.executeQuery("SELECT * FROM Profile");
+            System.out.println("List of Profiles: ");
+            while (res.next()) {
+                System.out.println("  " + res.getInt("ID")
+                        + ", " + res.getString("FirstName")
+                        + ", " + res.getString("LastName")
+                        + ", " + res.getDouble("Point")
+                        + ", " + res.getDate("BirthDate")
+                        + ", " + res.getTimestamp("ModTime"));
+            }
+            res.close();
+
+            sta.close();
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+
+
+    private static void dropTable() {
+        Connection con = null;
+        try {
+
+            // Setting up the DataSource object
+            com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds
+                    = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
+            ds.setServerName("localhost");
+            ds.setPortNumber(3306);
+            ds.setDatabaseName(databaseName);
+            ds.setUser(user);
+            ds.setPassword(passwd);
+
+            // Getting a connection object
+            con = ds.getConnection();
+
+            // Creating a database table
+            Statement sta = con.createStatement();
+            int count = sta.executeUpdate("DROP TABLE IF EXISTS Profile ");
+            System.out.println("DROP Table IF EXISTS Profile.");
+            sta.close();
+
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+
+
     public static void main(String[] args) throws Exception {
 //        printDrivers();
 //        connectionByDriverManager();
 //        connectionByDataSource();
 //        checkDriverServerInfo();
 
+        dropTable();
         createTableWithAutoIncrement();
+        checkInsertStatement();
+
     }
 
 
