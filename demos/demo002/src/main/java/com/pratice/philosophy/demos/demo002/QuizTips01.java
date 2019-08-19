@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.Enumeration;
 import java.util.Random;
 
+//http://www.herongyang.com/JDBC/MySQL-JDBC-Driver.html
 public class QuizTips01 {
 
     private static String databaseName = "jdbc";

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+//http://www.herongyang.com/JDBC/MySQL-PreparedStatement.html
 public class QuizTips02 {
     private static String databaseName = "jdbc";
     private static String user = "root";

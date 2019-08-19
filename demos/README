@@ -8,9 +8,9 @@ demo002:{JDBC}
         http://www.herongyang.com/JDBC/MySQL-JDBC-Driver.html
         http://www.herongyang.com/JDBC/MySQL-PreparedStatement.html
         http://www.herongyang.com/JDBC/MySQL-JdbcRowSet-Implementation.html
-        http://www.herongyang.com/JDBC/MySQL-CallableStatement.html
-        http://www.herongyang.com/JDBC/MySQL-CLOB-Large-Object.html
-        http://www.herongyang.com/JDBC/MySQL-BLOB-Large-Object.html
+       todo: http://www.herongyang.com/JDBC/MySQL-CallableStatement.html
+       todo: http://www.herongyang.com/JDBC/MySQL-CLOB-Large-Object.html
+       todo: http://www.herongyang.com/JDBC/MySQL-BLOB-Large-Object.html
 
 
 demo00X:{XXX}

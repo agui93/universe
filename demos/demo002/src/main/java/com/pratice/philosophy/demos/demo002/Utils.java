@@ -30,7 +30,7 @@ public final class Utils {
 
             // Creating a database table
             Statement sta = con.createStatement();
-            int count = sta.executeUpdate("DROP TABLE IF EXISTS Profile ");
+            sta.executeUpdate("DROP TABLE IF EXISTS Profile ");
             System.out.println("DROP Table IF EXISTS Profile.");
             sta.close();
 
