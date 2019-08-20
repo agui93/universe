@@ -1,7 +1,8 @@
 demo001:{spring jdbc}
     REFERENCE:https://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/html/jdbc.html
     REFERENCE:https://docs.spring.io/spring/docs/5.1.9.RELEASE/spring-framework-reference/data-access.html#jdbc
-
+    todo manage connection
+    todo exception
 
 demo002:{JDBC}
     REFERENCE:http://www.herongyang.com/JDBC/
@@ -13,8 +14,10 @@ demo002:{JDBC}
        todo: http://www.herongyang.com/JDBC/MySQL-BLOB-Large-Object.html
 
 
-demo00X:{XXX}
-    REFERENCE:
+demo003:{Mybatis}
+    REFERENCE:http://www.mybatis.org/mybatis-3/
+        https://www.tutorialspoint.com/mybatis/index.htm
+        todo: https://www.tutorialspoint.com/mybatis/mybatis_dynamic_sql.htm
 
 
 demo00X:{XXX}
