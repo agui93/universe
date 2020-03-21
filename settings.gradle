@@ -3,3 +3,4 @@ include 'demos:demo001'
 include 'demos:demo002'
 include 'demos:demo003'
 
+include 'algs:algs4'
