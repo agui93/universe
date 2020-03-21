@@ -1,4 +1,6 @@
 *.iml
+testOut
+testData/
 gradlew
 gradlew.bat
 gradle/
