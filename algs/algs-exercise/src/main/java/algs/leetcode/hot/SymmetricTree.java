@@ -5,7 +5,7 @@ import java.util.Queue;
 
 /**
  * https://leetcode-cn.com/problems/symmetric-tree/
- * 考察:递归
+ * 考察:递归 二叉树遍历
  */
 public class SymmetricTree {
 
@@ -34,7 +34,7 @@ public class SymmetricTree {
     }
 
 
-    //BFS
+    //BFS队列遍历 [9,-42,-42,null,76,76,null,null,13,null,13]
     public boolean isSymmetricByBFS(TreeNode root) {
         if (root == null) {
             return true;
@@ -47,7 +47,7 @@ public class SymmetricTree {
             TreeNode t1 = queue.poll();
             TreeNode t2 = queue.poll();
             if (t1 == null && t2 == null) {
-                return true;
+                continue;       //该步骤
             }
             if (t1 == null || t2 == null) {
                 return false;
@@ -65,8 +65,8 @@ public class SymmetricTree {
         return true;
     }
 
-    //todo 栈模拟递归
-    public boolean isSymmetricByStack() {
+    //todo DFS栈遍历
+    public boolean isSymmetricByDFS() {
         return false;
     }
 
@@ -74,6 +74,10 @@ public class SymmetricTree {
 //        return isSymmetricByRecursion(root, root);
         return isSymmetricByBFS(root);
     }
+
+
+    //先序 中序 后序遍历的方式进行对比
+
 
 
     public static void main(String[] args) {
