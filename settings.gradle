@@ -5,3 +5,7 @@ include 'demos:demo003'
 
 include 'algs:algs4'
 include 'algs:algs-exercise'
+
+
+include 'tools'
+include 'tools:jol-tool'
