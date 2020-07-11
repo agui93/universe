@@ -1,9 +1,9 @@
-# 剑指Offer
+# 剑指Offer(the second)
 
 ## 数组（共12道题目）：
-数组中的重复数字 <br>
-二维数组中的查找  <br>
-旋转数组的最小数字 <br>
+数组中的重复数字 DuplicationInArray 第3题<br>
+二维数组中的查找  FindInPartiallySortedMatrix 第4题 <br>
+旋转数组的最小数字 MinNumberInRotatedArray 第11题<br>
 调整数组顺序使奇数位于偶数前面 <br>
 顺时针打印矩阵 <br>
 数组中出现次数超过一半的数字 <br>
@@ -15,7 +15,7 @@
 构建乘积数组 <br>
 
 ## 字符串（共9道题目）：
-替换空格 <br>
+替换空格 ReplaceSpaces 第5题 <br>
 字符串的排列 <br>
 第一个只出现一次的字符 <br>
 左旋转字符串 <br>
@@ -26,7 +26,7 @@
 字符流中第一个不重复的字符 <br>
 
 ## 链表
-从尾到头打印链表 <br>
+从尾到头打印链表 PrintListInReversedOrder 第6题<br>
 链表中倒数第K个结点 <br>
 反转链表 <br>
 合并两个排序的链表 <br>
@@ -38,7 +38,7 @@
 
 
 ## 树和二叉树（15道）
-重建二叉树 <br>
+重建二叉树 ConstructBinaryTree 第7题<br>
 树的子结构 <br>
 二叉树的镜像 <br>
 从上往下打印二叉树 <br>
@@ -47,7 +47,7 @@
 二叉搜索树与双向链表 <br>
 二叉树的深度 <br>
 平衡二叉树 <br>
-二叉树的下一个结点 <br>
+二叉树的下一个结点 NextNodeInBinaryTrees 第8题 <br>
 对称的二叉树 <br>
 按之字形顺序打印二叉树 <br>
 把二叉树打印成多行 <br>
@@ -56,18 +56,18 @@
 
 
 ## 回溯法（2道）：
-矩阵中的路径 <br>
-机器人的运动范围 <br>
+矩阵中的路径 StringPathInMatrix 第12题<br>
+机器人的运动范围 RobotMove 第13题<br>
 
 
 ## 栈和队列（3道）：
-用两个栈实现队列 <br>
+用两个栈实现队列 QueueWithTwoStacks 第9题 <br>
 包含min函数的栈 <br>
 栈的压入弹出序列 <br>
 
 
 ## 递归和循环(4道)
-斐波那契数列 <br>
+斐波那契数列 Fibonacci 第10题<br>
 跳台阶 <br>
 变态跳台阶 <br>
 矩形覆盖 <br>
@@ -80,7 +80,7 @@
 
 
 ## 其他(10道)：
-二进制中1的个数 <br>
+二进制中1的个数 NumberOf1InBinary 第15题<br>
 最小的K个数 <br>
 从1到n整数中1出现的次数 <br>
 丑数 <br>
@@ -90,3 +90,7 @@
 圆圈中最后剩下的数 <br>
 数据流中的中位数 <br>
 滑动窗口的最大值 <br>
+
+
+## 待分类
+剪绳子 CuttingRope 第14题 <br>

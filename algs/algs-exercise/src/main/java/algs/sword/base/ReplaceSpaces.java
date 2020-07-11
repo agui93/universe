@@ -1,16 +1,16 @@
 package algs.sword.base;
 
 /**
- * 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
- * 示例 1：
- * 输入：s = "We are happy."
- * 输出："We%20are%20happy."
+ * // 面试题5：替换空格
+ * // 题目：请实现一个函数，把字符串中的每个空格替换成"%20"。例如输入“We are happy.”，
+ * // 则输出“We%20are%20happy.”。
  *
  * @author agui93
  * @since 2020/7/11
  */
 public class ReplaceSpaces {
 
+    //todo by 对比string.replace*方法
     public static String replaceSpace(String s) {
         if (s == null || s.length() == 0) {
             return "";
