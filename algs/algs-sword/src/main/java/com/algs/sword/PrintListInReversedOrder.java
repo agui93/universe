@@ -1,4 +1,4 @@
-package com.algs.sword.base;
+package com.algs.sword;
 
 /**
  * // 面试题6：从尾到头打印链表
