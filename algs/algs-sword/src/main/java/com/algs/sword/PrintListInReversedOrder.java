@@ -36,10 +36,9 @@ public class PrintListInReversedOrder {
         }
 
         int[] values = new int[stack.size()];
-        int i = 0;
 
-        while (!stack.isEmpty()) {
-            values[i++] = stack.pop().value;
+        for (int i = 0; i < values.length; i++) {
+            values[i] = stack.pop().value;
         }
 
 
