@@ -15,8 +15,7 @@
  */
 package com.universe.embedded.lmax.disruptor.perf.support;
 
-public enum FunctionStep
-{
+public enum FunctionStep {
     ONE,
     TWO,
     THREE

@@ -15,10 +15,10 @@
  */
 package com.universe.embedded.lmax.disruptor.perf.workhandler.queue;
 
+import com.lmax.disruptor.util.DaemonThreadFactory;
 import com.universe.embedded.lmax.disruptor.perf.AbstractPerfTestQueue;
 import com.universe.embedded.lmax.disruptor.perf.support.PerfTestUtil;
 import com.universe.embedded.lmax.disruptor.perf.support.ValueAdditionQueueProcessor;
-import com.lmax.disruptor.util.DaemonThreadFactory;
 
 import java.util.concurrent.*;
 
