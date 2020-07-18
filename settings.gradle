@@ -13,6 +13,8 @@ include 'tools:jol-tool'
 include 'frameworks'
 include 'frameworks:disruptor'
 include 'frameworks:netty'
+include 'frameworks:kafka'
+
 
 include 'storage'
 include 'storage:mongo'

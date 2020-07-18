@@ -1,0 +1,13 @@
+
+dependencies {
+    compile 'org.apache.kafka:kafka-core:0.10.2.1'
+    compile 'org.apache.kafka:kafka-clients:0.10.2.1'
+    compile 'org.apache.kafka:connect-api:0.10.2.1'
+    compile 'org.apache.kafka:connect-runtime:c0.10.2.1'
+    compile 'org.apache.kafka:kafka-tools:0.10.2.1'
+
+//include 'core', 'examples', 'clients', 'tools', 'streams', 'streams:examples', 'log4j-appender',
+//        'connect:api', 'connect:transforms', 'connect:runtime', 'connect:json', 'connect:file'
+
+    testCompile "junit:junit:4.12"
+}
