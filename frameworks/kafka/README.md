@@ -1,5 +1,6 @@
 # kafka
 
+https://kafka.apache.org/0102/javadoc/index.html
 
 raw编程 <br> 
 语言开发框架(不同的语言版本以及不同的方案对比) <br>
