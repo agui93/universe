@@ -107,3 +107,65 @@
 最长不含重复字符的子字符串 LongestSubstringWithoutDup 第48题 <br>
 n个骰子的点数 DicesProbability 第60题 <br>
 股票的最大利润 MaximalProfit 第63题 <br>
+
+## Summary
+
+```
+基本的数据结构
+
+数组
+链表
+字符串
+栈
+队列
+树
+哈希
+堆
+```
+
+
+
+```
+stack特点: LIFO
+
+JDK栈工具 ->
+java.util.Stack 
+java.util.Deque
+```     
+<br>
+
+```
+queue特点: FIFO
+
+JDK队列工具 ->
+java.util.Collection
+java.util.LinkedList
+java.util.PriorityQueue
+java.util.concurrent.LinkedBlockingQueue
+java.util.concurrent.BlockingQueue
+java.util.concurrent.ArrayBlockingQueue
+java.util.concurrent.LinkedBlockingQueue
+java.util.concurrent.PriorityBlockingQueue
+```
+
+<br>
+
+```
+Tree
+
+遍历(递归与非递归):前序、中序、后序、层次
+
+
+```
+
+```
+algorithm strategy
+
+递归
+分而治之
+回溯
+贪心
+动态规划
+
+
+```

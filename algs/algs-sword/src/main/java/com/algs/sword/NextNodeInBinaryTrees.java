@@ -1,4 +1,4 @@
-package com.algs.sword.base;
+package com.algs.sword;
 
 /**
  * // 面试题8：二叉树的下一个结点
