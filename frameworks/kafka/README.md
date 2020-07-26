@@ -81,8 +81,48 @@ API样例;<br>
 
 
 
+## 传递性保证
+
+### 语义
+At most once <br>
+At least once <br>
+Exactly once <br>
+
+
+### 支持的提交策略
+1.自动提交offset: enable.auto.commit auto.commit.interval.ms poll调用 <br>
+2.手工同步提交: commitSync()方法 <br>
+3.手工异步提交: commitAsync()方法 <br>
+
+分析不同的提交策略提交时机、消费消息处理时机、消费者重启时机、ReBalance时机这些因素和语义的关系
+
+
+### Exactly-Once方案 
+
+Exactly-Once分析和实现思路: <br>
+1.生产者要保证不会产生重复的消息并且成功投递 <br>
+2.消费者不能重复拉取相同的消息 <br>
+
+Exactly-Once可行方案(1.offset提交和消息处理合成一个事务处理  2.重启或者ReBalance时进行seekOffset) <br>
+将offset和消息处理放在一个事务中，事务执行成功则认为此消息被消费，否则事务回滚需要重新消费。 <br>
+当出现消费者宕机重启或ReBalance操作(ConsumerRebalanceListener回调)时，消费者可以从关系型数据库中找到对应的offset，然后调用KafkaConsumer.seek()方法手动设置消费位置，从此offset处开始继续消费。<br>
+
+
+Exactly-Once可选方案(At least once的语义下,消费者通过幂等保证语义收敛)
+生成者保证消息一定被集群分区保存
+消费者保证消费方法幂等
+
+
+Exactly-Once可选方案(At least once的语义下,生成者和消费者通过全局唯一ID保证语义收敛)
+生产者保证消息一定被集群分区保存,消息附带全局唯一ID
+消费者可以根据全局唯一ID进行去重处理
+
+其他参考 <br>
+https://cwiki.apache.org/confluence/display/KAFKA/KIP-98+-+Exactly+Once+Delivery+and+Transactional+Messaging <br>
 
 
 
+
+## 源码分析-消费者
 
 
