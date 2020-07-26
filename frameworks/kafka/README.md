@@ -126,3 +126,14 @@ https://cwiki.apache.org/confluence/display/KAFKA/KIP-98+-+Exactly+Once+Delivery
 ## 源码分析-消费者
 
 
+心跳检查 故障转移 Group-ReBalance
+
+
+消费者的状态转移与各请求之间的关系 <br>
+状态:Initialize、Joining、AwaitingSync、Stable、StopConsumption <br>
+请求:JoinGroupRequest/JoinGroupResponse、SyncGroupRequest/SyncGroupResponse、
+HeartbeatRequest/HeartbeatResponse、GroupCoordinationRequest/GroupCoordinationResponse
+
+
+
+
