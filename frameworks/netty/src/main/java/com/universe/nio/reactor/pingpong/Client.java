@@ -29,7 +29,10 @@ public class Client implements Runnable {
 
 
             ByteBuffer byteBuffer = ByteBuffer.allocate(4);
-            readAndWrite(byteBuffer);
+            for (int i = 0; i < 4; i++) {
+                readAndWrite(byteBuffer);
+            }
+
 
             System.out.println(this.socketChannel + "关闭链接");
             this.socketChannel.close();

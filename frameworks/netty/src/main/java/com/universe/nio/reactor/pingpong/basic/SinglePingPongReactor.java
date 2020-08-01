@@ -147,12 +147,10 @@ public class SinglePingPongReactor {
         }
 
         private boolean inputIsComplete() {
-            //todo 如何判断读已完成
             return !input.hasRemaining();
         }
 
         private boolean outputIsComplete() {
-            //todo 如何判断写已完成
             return !output.hasRemaining();
         }
     }
