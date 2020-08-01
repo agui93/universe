@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author agui93
@@ -19,17 +22,18 @@ public class Client implements Runnable {
     @Override
     public void run() {
         try {
+            Thread.sleep(new Random().nextInt(10) + 1);
             //建立连接
             this.socketChannel.connect(new InetSocketAddress(8089));
             System.out.println(this.socketChannel + "发起链接");
 
-            //PING
+
             ByteBuffer byteBuffer = ByteBuffer.allocate(4);
             readAndWrite(byteBuffer);
 
-            this.socketChannel.close();
             System.out.println(this.socketChannel + "关闭链接");
-        } catch (IOException e) {
+            this.socketChannel.close();
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -37,6 +41,8 @@ public class Client implements Runnable {
     }
 
     private void readAndWrite(ByteBuffer byteBuffer) throws IOException {
+        //PING
+        byteBuffer.clear();
         byteBuffer.put("PING".getBytes());
         byteBuffer.flip();
         while (byteBuffer.hasRemaining()) {
@@ -58,7 +64,12 @@ public class Client implements Runnable {
     }
 
     public static void main(String[] args) throws IOException {
-        new Client().run();
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            threads.add(new Thread(new Client()));
+        }
+        threads.forEach(Thread::start);
+
     }
 }
 
