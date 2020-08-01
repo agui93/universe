@@ -1,4 +1,4 @@
-package com.universe.nio.reactor.pingpong.mainsubreactor;
+package com.universe.nio.reactor.accumulator;
 
 /**
  * @author agui93
