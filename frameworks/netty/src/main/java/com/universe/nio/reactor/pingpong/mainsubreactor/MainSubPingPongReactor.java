@@ -41,6 +41,7 @@ public class MainSubPingPongReactor {
         public void run() {
             try {
                 while (!Thread.interrupted()) {
+//                    int selectNum = this.selector.select(100);
                     int selectNum = this.selector.select();
                     if (selectNum > 0) {
                         Set<SelectionKey> selectionKeys = this.selector.selectedKeys();
@@ -94,7 +95,6 @@ public class MainSubPingPongReactor {
 
 
         public Handler(Selector selector, SocketChannel socketChannel) throws IOException {
-
             this.socketChannel = socketChannel;
             socketChannel.configureBlocking(false);
             this.selectionKey = socketChannel.register(selector, 0);
@@ -118,7 +118,8 @@ public class MainSubPingPongReactor {
             int bytes = socketChannel.read(input);
             if (bytes > 0) {
                 if (inputIsComplete()) {
-                    executor.execute(new Processer());
+                    state = PROCESSING;
+                    executor.execute(new Processor());
                 }
             } else if (bytes == -1) {
                 System.out.println(this.socketChannel + "关闭链接");
@@ -127,13 +128,12 @@ public class MainSubPingPongReactor {
             }
         }
 
-        private void send() throws IOException {
+        private synchronized void send() throws IOException {
             socketChannel.write(output);
             if (outputIsComplete()) {
                 System.out.println(this.socketChannel + "发送数据:PONG");
                 state = READING;
                 selectionKey.interestOps(SelectionKey.OP_READ);
-                input.clear();
             }
         }
 
@@ -143,17 +143,18 @@ public class MainSubPingPongReactor {
             while (input.hasRemaining()) {
                 System.out.print((char) input.get());
             }
+            input.clear();
             System.out.println();
         }
 
         synchronized void processAndHandOff() {
             process();
-
             state = SENDING;
             output.clear();
             output.put("PONG".getBytes());
             output.flip();
             selectionKey.interestOps(SelectionKey.OP_WRITE);
+            selectionKey.selector().wakeup();
         }
 
         private boolean inputIsComplete() {
@@ -164,7 +165,7 @@ public class MainSubPingPongReactor {
             return !output.hasRemaining();
         }
 
-        class Processer implements Runnable {
+        class Processor implements Runnable {
             public void run() {
                 processAndHandOff();
             }

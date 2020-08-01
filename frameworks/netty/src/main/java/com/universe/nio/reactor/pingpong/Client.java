@@ -29,7 +29,7 @@ public class Client implements Runnable {
 
 
             ByteBuffer byteBuffer = ByteBuffer.allocate(4);
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 11; i++) {
                 readAndWrite(byteBuffer);
             }
 
@@ -68,7 +68,7 @@ public class Client implements Runnable {
 
     public static void main(String[] args) throws IOException {
         List<Thread> threads = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             threads.add(new Thread(new Client()));
         }
         threads.forEach(Thread::start);
