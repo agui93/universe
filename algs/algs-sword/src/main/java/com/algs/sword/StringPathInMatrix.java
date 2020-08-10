@@ -1,4 +1,4 @@
-package com.algs.sword.base;
+package com.algs.sword;
 
 /**
  * // 面试题12：矩阵中的路径
@@ -16,4 +16,6 @@ package com.algs.sword.base;
  * @since 2020/7/11
  */
 public class StringPathInMatrix {
+
+
 }

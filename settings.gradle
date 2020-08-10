@@ -11,10 +11,17 @@ include 'tools'
 include 'tools:jol-tool'
 
 include 'frameworks'
+
 include 'frameworks:disruptor'
-include 'frameworks:netty'
-include 'frameworks:kafka'
+
+include 'frameworks:messages:kafka'
+
+include 'frameworks:networks:netty'
+
+include 'frameworks:storage:mongo'
+include 'frameworks:storage:mysql'
+
+include 'frameworks:cache:couchbase'
+include 'frameworks:cache:redis'
 
 
-include 'storage'
-include 'storage:mongo'
