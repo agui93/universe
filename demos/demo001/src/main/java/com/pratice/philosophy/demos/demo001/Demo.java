@@ -303,8 +303,8 @@ public class Demo {
     }
 
     public static void main(String[] args) {
-//        basicOperations();
+        basicOperations();
 //        batchOperations();
-        simpleJdbcInsert();
+//        simpleJdbcInsert();
     }
 }
